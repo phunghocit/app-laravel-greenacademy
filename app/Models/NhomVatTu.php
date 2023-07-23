@@ -12,8 +12,8 @@ class NhomVatTu extends Model
 	protected $table = 'nhomvattu';
 
 	protected $fillable = ['nvt_ma','nvt_ten'];
-    public function vattu()
-    {
-        return $this->hasMany(VatTu::class, 'vt_id');
-    }
+    // public function vattu()
+    // {
+    //     return $this->hasMany(VatTu::class, 'vt_id');
+    // }
 }

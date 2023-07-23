@@ -11,8 +11,8 @@ class PhongBan extends Model
     protected $table = 'phongban';
 
 	protected $fillable = ['pb_ma','pb_ten'];
-    public function nhanvien()
-    {
-        return $this->hasMany(NhanVien::class, 'nv_id');
-    }
+    // public function nhanvien()
+    // {
+    //     return $this->hasMany(NhanVien::class, 'nv_id');
+    // }
 }

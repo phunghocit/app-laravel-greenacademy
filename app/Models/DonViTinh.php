@@ -11,8 +11,8 @@ class DonViTinh extends Model
     protected $table = 'donvitinh';
 
 	protected $fillable = ['dvt_ma','dvt_ten'];
-    public function vattu()
-    {
-        return $this->hasMany(VatTu::class, 'vt_id');
-    }
+    // public function vattu()
+    // {
+    //     return $this->hasMany(VatTu::class, 'vt_id');
+    // }
 }

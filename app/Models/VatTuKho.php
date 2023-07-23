@@ -12,11 +12,11 @@ class VatTuKho extends Model
 
 	protected $fillable = ['vt_id','sl_nhap','sl_xuat','sl_ton','kho_id'];
 
-    public function vattu()
-    {
-        return $this->hasMany(VatTu::class, 'vt_id');
-    }
-    public function kho(){
-        return $this->belongsTo(kho::class, 'kho_id');
-    }
+    // public function vattu()
+    // {
+    //     return $this->hasMany(VatTu::class, 'vt_id');
+    // }
+    // public function kho(){
+    //     return $this->belongsTo(kho::class, 'kho_id');
+    // }
 }

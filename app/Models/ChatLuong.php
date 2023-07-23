@@ -11,8 +11,8 @@ class ChatLuong extends Model
     protected $table = 'chatluong';
 
 	protected $fillable = ['cl_ma','cl_ten'];
-    public function vattu()
-    {
-        return $this->hasMany(VatTu::class, 'vt_id');
-    }
+    // public function vattu()
+    // {
+    //     return $this->hasMany(VatTu::class, 'vt_id');
+    // }
 }

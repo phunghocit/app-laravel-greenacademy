@@ -11,8 +11,8 @@ class ChuyenKho extends Model
     protected $table = 'chuyenkho';
 
 	protected $fillable = ['ck_ma','ck_ngay','ck_lydo','nv_id','ck_tongtien'];
-    public function chitietchuyenkho()
-    {
-        return $this->hasOne(ChuyenKho::class, 'ck_id');
-    }
+    // public function chitietchuyenkho()
+    // {
+    //     return $this->hasOne(ChuyenKho::class, 'ck_id');
+    // }
 }

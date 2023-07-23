@@ -1,1 +1,0 @@
-@extends('app.layout.master')

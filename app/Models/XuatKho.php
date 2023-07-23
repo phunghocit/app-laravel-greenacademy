@@ -11,11 +11,11 @@ class XuatKho extends Model
     protected $table = 'xuatkho';
 
 	protected $fillable = ['xk_ma','xk_ngaylap','xk_lydo','xk_diachi','xk_tongtien','ct_id','nv_id'];
-    public function chitietxuatkho()
-    {
-        return $this->hasOne(ChiTietXuatKho::class, 'ctxk_id');
-    }
-    public function congtrinh(){
-        return $this->belongsTo(CongTrinh::class, 'ct_id');
-    }
+    // public function chitietxuatkho()
+    // {
+    //     return $this->hasOne(ChiTietXuatKho::class, 'ctxk_id');
+    // }
+    // public function congtrinh(){
+    //     return $this->belongsTo(CongTrinh::class, 'ct_id');
+    // }
 }

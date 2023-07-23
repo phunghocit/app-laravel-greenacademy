@@ -1,0 +1,168 @@
+https://onlinewebtutorblog.com/laravel-10-authentication-with-laravel-ui-tutorial/#:~:text=We%20will%20walk%20you%20through%20the%20process%20of,reset%20functionality%20into%20your%20Laravel%2010%20applications%20quickly.
+
+composer require tymon/jwt-auth --ignore-platform-reqs   //khi khác phiên bản thì dùng lệnh này
+
+
+composer install
+npm install 
+cp .env.example .env
+	
+php artisan migrate
+php artisan db:seed
+phpunit
+composer require laravel/ui
+php artisan ui bootstrap --auth
+npm install 
+npm run dev
+php artisan migrate
+php artisan serve
+php artisan breeze:install blade // cài đặt login theo blade
+
+composer install --ignore-platform-reqs
+
+php artisan storage:link  //lệnh public cac thư mục trong storage
+
+        admin, Phòng lãnh đạo, Thủ kho,nhân viên
+=======================
+đăng nhập
+đăng xuất
+tạo tài khoản
+đổi mật khẩu
+phân quyền
+thông tin công ty
+khu vực
+nhà sản xuất
+nhà phân phối 
+vật tư
+nhóm vật tư
+đơn vị tính
+chất lượng
+kho
+công trình
+phòng ban    +
+nhân viên   +
+nhập kho
+xuất kho
+chuyển kho
+liên hệ
+phản hồi
+
+
+
+authentication
+az
+
+rdbms
+
+
+php artisan make:controller namecontroller
+php artisan make:controller Admin\ProductController --resource // tạo sẵn các function cần dùng trong CRUD
+php artisan route:list 
+
+
+php artisan make:migration create_product_category_table
+php artisan migrate
+
+php artisan migrate:rollback  //dùng để roll back lại trc đó
+
+php artisan make:migration add_column_qty_to_product_table
+
+php artisan breeze:install
+php artisan db:seed
+
+php artisan make:middleware IsAdmin
+
+hàm cacbon/cacbon :hàm sử lý datetime
+.blade dùng các mã
+	@php
+	@endphp
+ và 
+	{{$content}} // dùng để htmlspecialchars
+
+
+id pk
+name -> varchar
+price -> float
+description ->text
+short_description ->text
+information ->
+
+qty -> int ->unsigned() (số lượng tồn)
+weight ->
+image_url
+created_at
+updated_at
+
+
+
+php - server 
+Ajax là của client bắn yêu cầu lên
+
+
+khi chạy sẽ mặc định chạy vào provider ->app và chạy mục boot
+
+thư mục vendor chứa các core trong dự án
+
+WYSWYG ->what u see what u get
+
+112/32 th42 trần thị hè p hiepthanh q12
+php artisan make:model Product
+
+
+
+các bước tạo model
+1 make model
+	php artisan make:model ProductCategory
+2 define table
+	 protected $table ='product_category';
+3 retrieve(get) all records
+	        //Eloquent
+        $productCategories = ProductCategory::where('status',1)->get();
+        $productCategories= DB::table('product_category')->where('status',1)->get();
+        return view('admin.product.create')->with('producCategories',$productCategories);
+
+Model ===========================
+1 product category chứa 1 category
+->belongsto()
+1 product category se chứa nhiều product
+->hasMany()
+
+
+============Tạo composer chung cho cả dự án
+1 php artisan make:provider ComposerServiceProvider
+2 APP\Providers\ComposerServiceProvider::class
+  trong app.php -> providers
+3. View::composer('*',function($view){
+             $view->with('phunghoc','Phung Dai Hoc');
+         });
+
+Đăng nhập x
+Đăng xuất x
+Tạo tài khoản x
+Đổi mật khẩu x
+Phân quyền x
+Thông tin công ty x
+
+Khu vực x
+Nhà sản xuất x
+Nhà phân phối x
+Vật tư x
+Nhóm vật tư x
+Đơn vị tính x
+Chất lượng x
+Kho x 
+Công trình  x
+Phòng ban x
+Nhân viên x
+
+Nhập kho x
+Xuất kho x
+Thẻ kho x
+Chuyển kho x
+Kho hàng x
+Thống kê x
+
+Hướng dẫn x
+Liên hệ x
+Thông tin x
+Phản hồi x

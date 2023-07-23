@@ -11,8 +11,8 @@ class ChiTietXuatKho extends Model
     protected $table = 'chitietxuatkho';
 
 	protected $fillable = ['ctxk_soluong','ctxk_thanhtien','vt_id','xk_id'];
-    public function xuatkho(){
-        return $this->belongsTo(XuatKho::class, 'xk_id');
-    }
+    // public function xuatkho(){
+    //     return $this->belongsTo(XuatKho::class, 'xk_id');
+    // }
     
 }

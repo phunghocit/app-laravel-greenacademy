@@ -12,15 +12,15 @@ class Kho extends Model
 	protected $table = 'kho';
 
 	protected $fillable = ['kho_ma','kho_ten','kho_lienhe','kho_diachi','kho_sdt','kho_quanly','kho_ghichu'];
-    public function vattu()
-    {
-        return $this->hasMany(VatTu::class, 'vt_id');
-    }
-    public function vattukho()
-    {
-        return $this->hasMany(VatTuKho::class, 'vtk_id');
-    }
-    public function chitietchuyenkho(){
-        return $this->belongsTo(ChiTietChuyenKho::class, 'ctck_id');
-    }
+    // public function vattu()
+    // {
+    //     return $this->hasMany(VatTu::class, 'vt_id');
+    // }
+    // public function vattukho()
+    // {
+    //     return $this->hasMany(VatTuKho::class, 'vtk_id');
+    // }
+    // public function chitietchuyenkho(){
+    //     return $this->belongsTo(ChiTietChuyenKho::class, 'ctck_id');
+    // }
 }

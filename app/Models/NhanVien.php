@@ -12,7 +12,7 @@ class NhanVien extends Model
 
 	protected $fillable = ['nv_ma','nv_ten','nv_gioitinh','nv_ngaysinh','nv_cmnd','nv_quequan','nv_sdt','nv_email','nv_ngayvaolam','pb_id','users_id'];
 
-    public function phongban(){
-        return $this->belongsTo(PhongBan::class, 'pb_id');
-    }
+    // public function phongban(){
+    //     return $this->belongsTo(PhongBan::class, 'pb_id');
+    // }
 }
