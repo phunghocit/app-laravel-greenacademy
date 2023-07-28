@@ -244,7 +244,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="{{route('khuvuc.index')}}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Khu vực</p>
                 </a>
@@ -262,7 +262,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('vattu.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Vật tư</p>
                 </a>

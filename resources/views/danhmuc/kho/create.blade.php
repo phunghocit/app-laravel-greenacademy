@@ -116,7 +116,7 @@
                 </div>
                 <footer id="submit-actions" class="form-actions">
                     <button id="submit-button" type="submit" class="btn btn-primary" name="action" value="CONFIRM"><i class="icon-save"></i>&nbsp&nbspLưu&nbsp&nbsp</button>
-                    <a href="{!! URL::route('kho.index') !!}" class="btn"><i class="icon-remove"></i>&nbsp&nbspHủy&nbsp&nbsp</a>
+                    <a href="{!! URL::route('khuvuc.index') !!}" class="btn"><i class="icon-remove"></i>&nbsp&nbspHủy&nbsp&nbsp</a>
                 </footer>
             </div>
             </form>

@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Chucnang\NhapKhoController;
 use App\Http\Controllers\Danhmuc\KhoController;
+use App\Http\Controllers\Danhmuc\KhuVucController;
+use App\Http\Controllers\Danhmuc\VatTuController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,11 +53,24 @@ Route::middleware('auth')->group(function () {
     Route::get('kho/create', [KhoController::class, 'create'])->name('kho.create');
     Route::post('kho/save', [KhoController::class, 'store'])->name('kho.save');
     Route::get('kho/{id}', [KhoController::class, 'show'])->name('kho.show');
-    Route::post('kho/{id}', [KhoController::class, 'update'])
+    Route::post('kho/update/{id}', [KhoController::class, 'update'])
     ->name('kho.update');
     Route::post('kho/delete/{id}', [KhoController::class, 'destroy'])
     ->name('kho.delete');
-
+    // ==============Khu vuc===============
+    Route::get('/khuvuc', [KhuVucController::class, 'index'])->name('khuvuc.index');
+    Route::get('khuvuc/create', [KhuVucController::class, 'create'])->name('khuvuc.create');
+    Route::post('khuvuc/save', [KhuVucController::class, 'store'])->name('khuvuc.save');
+    Route::get('khuvuc/{id}', [KhuVucController::class, 'show'])->name('khuvuc.show');
+    Route::post('khuvuc/update/{id}', [KhuVucController::class, 'update'])
+    ->name('khuvuc.update');
+    Route::post('khuvuc/delete/{id}', [KhuVucController::class, 'destroy'])
+    ->name('khuvuc.delete');
+    // ==============Vat tu===============
+    Route::get('/vattu', [VatTuController::class, 'index'])->name('vattu.index');
+    Route::get('vattu/create', function (){
+        return view('danhmuc.vattu.create');
+    })->name('vattu.create');
     
 });
 

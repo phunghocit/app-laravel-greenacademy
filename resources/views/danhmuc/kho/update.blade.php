@@ -17,9 +17,8 @@
 @section('main-content')
 <section>
         <div class="container">
-        <form role="form" method="POST" action="{{ route('kho.update') }}">
+        <form role="form" method="POST" action="{{ route('kho.update',['id' => $kho->id]) }}">
             @csrf
-            <!-- <input type="hidden" name="_token" value="{!! csrf_token() !!}" /> -->
             <div class="row">
                 <div id="acct-password-row" class="span7">
                     <fieldset>

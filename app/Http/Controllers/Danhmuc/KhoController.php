@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Danhmuc;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreKhoRequest;
+use App\Http\Requests\UpdateKhoRequest;
 use App\Models\Kho;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -58,31 +59,45 @@ class KhoController extends Controller
         // $kho = DB::select('select * from kho where id = ?', [$id]);
         // return view('kho.detail', ['kho' => $kho]);
         $kho = DB::table('kho')->where('id', $id)->first();
-		return view('danhmuc.kho.edit', compact('kho'));
+		return view('danhmuc.kho.update', ['kho' => $kho]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(UpdateKhoRequest $request,string $id)
     {
-        //
-    }
+        // $kho = DB::table('kho')->where('id',$id)->update([
+        //     'kho_ma' => $request->ma,
+        //     'kho_ten'=> $request->ten,
+        //     'kho_lienhe'=> $request->lienhe,
+        //     'kho_diachi' => $request->diachi,
+        //     'kho_sdt' => $request->sdt,
+        //     'kho_quanly' => $request->quanly,
+        //     'kho_ghichu' => $request->ghichu,
+		// 	]);
+        //     $msg = $kho ? 'Sửa kho mới thành công!' : 'Sửa kho mới thất bại!';
+    
+        //     return redirect()->route('kho.index')->with('message', $msg);
+	}
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
+        // dd($id, $request->all());
         $check = DB::table('kho')
         ->where('id', $id)
         ->update([
+            'kho_ma' => $request->ma,
 			'kho_ten' => $request->ten,
 			'kho_lienhe' => $request->lienhe,
 			'kho_diachi' => $request->diachi,
 			'kho_sdt' => $request->sdt,
 			'kho_quanly' => $request->quanly,
-			'kho_ghichu' => $request->ghichu
+			'kho_ghichu' => $request->ghichu,
         ]);
 
         $message = $check ? 'Cập nhật thành công' : 'Cập nhật thất bại';
@@ -95,7 +110,7 @@ class KhoController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
+        // dd($id);
         $check = DB::table('kho')->where('id',$id)->delete();
         // $productCategory = Kho::find($id);
         // $check = $productCategory->delete();

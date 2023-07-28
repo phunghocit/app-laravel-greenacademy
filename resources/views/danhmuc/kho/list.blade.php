@@ -48,6 +48,7 @@
                 </tr>
             </thead>
             <tbody>
+
             @foreach ($kho as $item)
             <tr>
                 <td>{!! $item->kho_ma !!}</td>
