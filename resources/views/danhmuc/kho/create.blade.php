@@ -26,48 +26,44 @@
                         <div class="control-group ">
                             <label class="control-label">Mã Kho</label>
                             <div class="controls">
-                                <input id="current-pass-control" name="ma" class="span4" type="text" value="{!! old('txtMa') !!}">
+                                <input id="ma" name="ma" class="span4" type="text" value="{!! old('txtMa') !!}">
                                 <div>
                                 @error('ma')
                                     <small style="color: red">{{ $message }}</small>
                                 @enderror
-                                    <!-- {!! $errors->first('ma') !!} -->
                                 </div>
                             </div>
                         </div>
                         <div class="control-group ">
                             <label class="control-label">Tên Kho</label>
                             <div class="controls">
-                                <input id="new-pass-control" name="ten" class="span4" type="text" value="{!! old('txtTen') !!}">
+                                <input id="ten" name="ten" class="span4" type="text" value="{!! old('txtTen') !!}">
                                 <div>
                                 @error('ten')
                                     <small style="color: red">{{ $message }}</small>
                                 @enderror
-                                    <!-- {!! $errors->first('ten') !!} -->
                                 </div>
                             </div>
                         </div>
                         <div class="control-group ">
                             <label class="control-label">Địa chỉ</label>
                             <div class="controls">
-                                <textarea id="" name="diachi" class="span4" type="text" value="{!! old('txtDiachi') !!}"></textarea>
+                                <textarea id="diachi" name="diachi" class="span4" type="text" value="{!! old('txtDiachi') !!}"></textarea>
                                 <div>
                                 @error('diachi')
                                     <small style="color: red">{{ $message }}</small>
                                 @enderror
-                                    <!-- {!! $errors->first('diachi') !!} -->
                                 </div>
                             </div>
                         </div>
                         <div class="control-group ">
                             <label class="control-label">Số điện thoại</label>
                             <div class="controls">
-                                <input id="new-pass-control" name="sdt" class="span4" type="text" value="{!! old('txtSDT') !!}">
+                                <input id="sdt" name="sdt" class="span4" type="text" value="{!! old('txtSDT') !!}">
                                 <div>
                                     @error('sdt')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
-                                    <!-- {!! $errors->first('sdt') !!} -->
                                 </div>
                             </div>
                         </div>
@@ -78,24 +74,22 @@
                         <div class="control-group ">
                             <label class="control-label">Liên hệ</label>
                             <div class="controls">
-                                <input id="new-pass-control" name="lienhe" class="span4" type="text" value="{!! old('txtLienhe') !!}">
+                                <input id="lienhe" name="lienhe" class="span4" type="text" value="{!! old('txtLienhe') !!}">
                                 <div>
                                     @error('lienhe')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
-                                    <!-- {!! $errors->first('lienhe') !!} -->
                                 </div>
                             </div>
                         </div>
                         <div class="control-group ">
                             <label class="control-label">Quản lý</label>
                             <div class="controls">
-                                <input id="new-pass-control" name="quanly" class="span4" type="text" value="{!! old('txtQuanly') !!}">
+                                <input id="quanly" name="quanly" class="span4" type="text" value="{!! old('txtQuanly') !!}">
                                 <div>
                                     @error('quanly')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
-                                    <!-- {!! $errors->first('quanly') !!} -->
                                 </div>
                             </div>
                         </div>
@@ -107,7 +101,6 @@
                                     @error('ghichu')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
-                                    <!-- {!! $errors->first('ghichu') !!} -->
                                 </div>
                             </div>
                         </div>
@@ -116,7 +109,7 @@
                 </div>
                 <footer id="submit-actions" class="form-actions">
                     <button id="submit-button" type="submit" class="btn btn-primary" name="action" value="CONFIRM"><i class="icon-save"></i>&nbsp&nbspLưu&nbsp&nbsp</button>
-                    <a href="{!! URL::route('khuvuc.index') !!}" class="btn"><i class="icon-remove"></i>&nbsp&nbspHủy&nbsp&nbsp</a>
+                    <a href="{!! URL::route('kho.index') !!}" class="btn"><i class="icon-remove"></i>&nbsp&nbspHủy&nbsp&nbsp</a>
                 </footer>
             </div>
             </form>
@@ -126,10 +119,6 @@
 
 @section('js-custom')
 <script>
-    ClassicEditor
-        .create( document.querySelector( '#ghichu' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+
 </script>
 @endsection

@@ -5,23 +5,22 @@
         <div class="row">
             <div class="span7">
                 <header class="page-header">
-                    <h3>Quản lý Khu vực<br/>
-                        <small></small>
+                    <h3>Quản lý nhà sản xuất<br/>
+                        <small>Thêm</small>
                     </h3>
                 </header>
-            </div>                      
+            </div>
         </div>
     </div>
 </section>
-@endsection
-
+@stop
 @section('main-content')
 <div class="span16" >
         <div class="box-header">
             <div class="row">
                 <div class="span11">
                     <fieldset>
-                        <a href="{{ route('khuvuc.create') }}" class="btn btn-info"><i class="icon-plus"></i>&nbspThêm</a>
+                        <a href="{!! URL::route('nhasanxuat.create') !!}" class="btn btn-info"><i class="icon-plus"></i>&nbspThêm</a>
                         <a href="#" class="btn btn-info"><i class="icon-print"></i>&nbsp&nbspIn&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                     </fieldset>
                 </div>
@@ -37,26 +36,48 @@
         <table class="table table-bordered table-hover tablesorter" id="sample-table">
             <thead style="background:#EFEFEF;">
                 <tr>
-                    <th class="span3">Mã Khu vực</th>
-                    <th>Tên Khu vực</th>
+                    <th class="span3">Mã Nhà sản xuất</th>
+                    <th class="span4">Tên Nhà sản xuất</th>
+                    <th class="span4">Khu vực</th>
                     <th class="span2"></th>
                 </tr>
             </thead>
             <tbody>
-            @foreach ($khuvuc as $item)
+            @foreach ($nhasanxuat as $item)
             <tr>
-                    <td>{!! $item->kv_ma !!}</td>
-                    <td>{!! $item->kv_ten !!}</td>
-                    <td class="td-actions">
-                        <form method="post" action="">
+                    <td>{!! $item->nsx_ma !!}</td>
+                    <td>{!! $item->nsx_ten !!}</td>
+                    <td>
+                        <?php $khuvuc = DB::table('khuvuc')->where('id',$item->kv_id)->first(); ?>
+                    @if (!empty($khuvuc->kv_ten))
+                        {!! $khuvuc->kv_ten !!}
+                    @else
+                        {!! NULL !!}
+                    @endif
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ route('nhasanxuat.delete', ['id' => $item->id]) }}">
                             @csrf
-                            <a href="{{ route('khuvuc.show', ['id' => $item->id]) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('nhasanxuat.show', ['id' => $item->id]) }}" class="btn btn-primary">Edit</a>
                             <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                        <!-- {{-- @if($product->trashed()) --}}
+        
+                        {{-- @endif --}} -->
                     </td>
                 </tr>
-            @endforeach 
+            @endforeach    
             </tbody>
         </table>
     </div>
+@stop
+
+@section('js-custom')
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#ghichu' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 @endsection

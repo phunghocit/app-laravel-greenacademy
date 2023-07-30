@@ -24,7 +24,11 @@ class StoreKhoRequest extends FormRequest
         return [
             'ma' => 'required|unique:kho,kho_ma',
 			'ten' => 'required',
-			'diachi' => 'required'
+			'diachi' => 'required',
+			'sdt' => 'required',
+			'lienhe' => 'required',
+			'quanly' => 'required',
+			'ghichu' => 'required',
         ];
     }
     

@@ -19,9 +19,9 @@ return new class extends Migration
 			$table->string('xk_lydo',255)->nullable();
 			$table->float('xk_tongtien')->unsigned()->nullable();
 			// $table->unsignedBigInteger('ct_id')->nullable();
-            // $table->foreign('ct_id')->references('id')->on('congtrinh')->nullable();
+            // $table->foreign('ct_id')->references('id')->on('congtrinh');
             // $table->unsignedBigInteger('nv_id')->nullable();
-            // $table->foreign('nv_id')->references('id')->on('nhanvien')->nullable();
+            // $table->foreign('nv_id')->references('id')->on('nhanvien');
             $table->timestamps();
             // $table->softDeletes(); //deleted_at
         });

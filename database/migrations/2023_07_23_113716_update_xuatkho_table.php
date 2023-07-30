@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::table('xuatkho', function (Blueprint $table) {
 
 			$table->unsignedBigInteger('ct_id')->nullable();
-            $table->foreign('ct_id')->references('id')->on('congtrinh')->nullable();
+            $table->foreign('ct_id')->references('id')->on('congtrinh');
             $table->unsignedBigInteger('nv_id')->nullable();
-            $table->foreign('nv_id')->references('id')->on('nhanvien')->nullable();
+            $table->foreign('nv_id')->references('id')->on('nhanvien');
             $table->softDeletes(); //deleted_at
         });
     }

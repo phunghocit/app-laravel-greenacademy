@@ -25,12 +25,11 @@
                         <div class="control-group ">
                             <label class="control-label">Mã Kho</label>
                             <div class="controls">
-                                <input id="current-pass-control" name="ma" class="span4" type="text" value="{{ $kho->kho_ma }}">
+                                <input id="current-pass-control" name="ma" class="span4" disabled='true' type="text" value="{{ $kho->kho_ma }}">
                                 <div>
                                 @error('ma')
                                     <small style="color: red">{{ $message }}</small>
                                 @enderror
-                                    <!-- {!! $errors->first('ma') !!} -->
                                 </div>
                             </div>
                         </div>
@@ -42,7 +41,6 @@
                                 @error('ten')
                                     <small style="color: red">{{ $message }}</small>
                                 @enderror
-                                    <!-- {!! $errors->first('ten') !!} -->
                                 </div>
                             </div>
                         </div>
@@ -54,7 +52,6 @@
                                 @error('diachi')
                                     <small style="color: red">{{ $message }}</small>
                                 @enderror
-                                    <!-- {!! $errors->first('diachi') !!} -->
                                 </div>
                             </div>
                         </div>
@@ -66,7 +63,6 @@
                                     @error('sdt')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
-                                    <!-- {!! $errors->first('sdt') !!} -->
                                 </div>
                             </div>
                         </div>
@@ -82,7 +78,6 @@
                                     @error('lienhe')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
-                                    <!-- {!! $errors->first('lienhe') !!} -->
                                 </div>
                             </div>
                         </div>
@@ -94,7 +89,6 @@
                                     @error('quanly')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
-                                    <!-- {!! $errors->first('quanly') !!} -->
                                 </div>
                             </div>
                         </div>
@@ -106,7 +100,6 @@
                                     @error('ghichu')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
-                                    <!-- {!! $errors->first('ghichu') !!} -->
                                 </div>
                             </div>
                         </div>

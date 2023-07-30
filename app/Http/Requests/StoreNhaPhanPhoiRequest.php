@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateKhoRequest extends FormRequest
+class StoreNhaPhanPhoiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,20 +22,14 @@ class UpdateKhoRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'ma' => 'required|unique',
 			'ten' => 'required',
+			'kv_id' => 'required',
 			'diachi' => 'required',
 			'sdt' => 'required',
-			'lienhe' => 'required',
-			'quanly' => 'required',
-			'ghichu' => 'required',
+			'email' => 'required',
+			'taikhoan' => 'required',
+			'nhanviendaidien' => 'required',
         ];
     }
-    
-	public function messages()
-	{
-		return [
-			'ten.required' =>'Vui lòng nhập tên',
-			'diachi.required' =>'Vui lòng nhập địa chỉ'
-		];
-	}
 }

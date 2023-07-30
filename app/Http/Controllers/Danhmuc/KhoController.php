@@ -85,7 +85,7 @@ class KhoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateKhoRequest $request, string $id)
     {
         // dd($id, $request->all());
         $check = DB::table('kho')
@@ -112,9 +112,10 @@ class KhoController extends Controller
     {
         // dd($id);
         $check = DB::table('kho')->where('id',$id)->delete();
-        // $productCategory = Kho::find($id);
+        // $check = Kho::find($id);
+        // dd($check);
         // $check = $productCategory->delete();
         $message = $check ? 'Xoá thành công!' : 'Xoá thất bại!';
-		return redirect()->route('danhmuc.kho.index')->with('message', $message);
+		return redirect()->route('kho.index')->with('message', $message);
     }
 }

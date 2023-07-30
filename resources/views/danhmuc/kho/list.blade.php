@@ -34,7 +34,7 @@
             </div>
             
         </div>
-        <table class="table table-bordered table-hover tablesorter" id="sample-table">
+        <table class="table table-bordered table-hover tablesorter" id="data-table">
             <thead style="background:#EFEFEF;">
                 <tr>
                     <th class="span2">Mã Kho</th>
@@ -61,7 +61,6 @@
                 <td>
                     <form method="POST" action="{{ route('kho.delete', ['id' => $item->id]) }}">
                         @csrf
-                        @method('delete')
                         <a href="{{ route('kho.show', ['id' => $item->id]) }}" class="btn btn-primary">Edit</a>
                         <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger">Delete</button>
                     </form>
@@ -74,4 +73,19 @@
             </tbody>
         </table>
     </div>
-@stop
+      @stop
+@section('js-custom')
+<script>
+    $(function () {
+      $('#data-table').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "responsive": true,
+      });
+    });
+  </script>
+@endsection
