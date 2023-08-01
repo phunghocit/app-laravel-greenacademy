@@ -36,7 +36,7 @@ class KhuVucController extends Controller
             'kv_ten'=> $request->ten,
  
             ]);
-            $msg = $data ? 'Thêm khu vực mới thành công!' : 'Thêm khu vực mới thất bại!';
+            $msg = $data ? 'Thêm mới thành công!' : 'Thêm mới thất bại!';
     
             return redirect()->route('khuvuc.index')->with('message', $msg);
     }
@@ -66,18 +66,13 @@ class KhuVucController extends Controller
         $check = DB::table('khuvuc')
         ->where('id', $id)
         ->update([
-            'kho_ma' => $request->ma,
-			'kho_ten' => $request->ten,
-			'kho_lienhe' => $request->lienhe,
-			'kho_diachi' => $request->diachi,
-			'kho_sdt' => $request->sdt,
-			'kho_quanly' => $request->quanly,
-			'kho_ghichu' => $request->ghichu,
+            'kv_ten'=> $request->ten,
         ]);
 
         $message = $check ? 'Cập nhật thành công' : 'Cập nhật thất bại';
 
         return redirect()->route('khuvuc.index')->with('message', $message);
+        
     }
 
     /**

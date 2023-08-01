@@ -11,6 +11,13 @@
                 </header>
             </div>
         </div>
+        <div class="row">
+            @if (session('message'))
+            <div class="alert-success">
+                {{ session('message') }}
+            </div>
+            @endif
+        </div>
     </div>
 </section>
 @stop
@@ -73,11 +80,5 @@
 @stop
 
 @section('js-custom')
-<script>
-    ClassicEditor
-        .create( document.querySelector( '#ghichu' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-</script>
+
 @endsection

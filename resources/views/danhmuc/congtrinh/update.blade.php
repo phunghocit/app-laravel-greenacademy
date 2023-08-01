@@ -18,14 +18,14 @@
 <section>
 
         <div class="container">  
-        <form role="form" method="POST" action="{{ route('khuvuc.update',['id' => $data->id]) }}">
+        <form role="form" method="POST" action="{{ route('congtrinh.update',['id' => $data->id]) }}">
             @csrf
             <div id="acct-password-row" class="span7">
                 <fieldset>
                     <div class="control-group ">
                         <label class="control-label">Mã Khu vực</label>
                         <div class="controls">
-                            <input id="current-pass-control" name="ma" class="span4" type="text" disabled="true" value="{!! $data->kv_ma !!}">
+                            <input id="current-pass-control" name="ma" class="span4" type="text" disabled="true" value="{!! $data->ct_ma !!}">
                             {{-- @error('ma')
                             <small style="color: red">{{ $message }}</small>
                             @enderror --}}
@@ -34,7 +34,7 @@
                     <div class="control-group ">
                         <label class="control-label">Tên Khu vực</label>
                         <div class="controls">
-                            <input id="new-pass-control" name="ten" class="span4" type="text" value="{{ $data->kv_ten }}">
+                            <input id="new-pass-control" name="ten" class="span4" type="text" value="{{ $data->ct_ten }}">
                             @error('ten')
                             <small style="color: red">{{ $message }}</small>
                             @enderror

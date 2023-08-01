@@ -19,8 +19,8 @@
 @section('main-content')
     <section>
         <div class="container">
-            <form action="" method="POST" accept-charset="utf-8">
-            <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
+            <form role="form" method="POST" action="{{ route('vattu.save') }}">
+                @csrf
             <div class="row">
             <div class="span11">
                     <div class="page-header">
@@ -31,34 +31,36 @@
                         <div class="control-group ">
                             <label class="control-label">Mã Vật tư</label>
                             <div class="controls">
-                                <input id="current-pass-control" name="txtMa" class="span4" type="text" value="{!! old('txtMa') !!}" autocomplete="false">
-                                <div>
-                                    {!! $errors->first('txtMa') !!}
-                                </div>
+                                <input id="current-pass-control" name="ma" class="span4" type="text" value="{!! old('txtMa') !!}" autocomplete="false">
+
                             </div>
                         </div>
                         <div class="control-group ">
                             <label class="control-label">Tên Vật tư</label>
                             <div class="controls">
-                                <input id="new-pass-control" name="txtTen" class="span4" type="text" value="{!! old('txtTen') !!}" autocomplete="false">
-                                <div>
-                                    {!! $errors->first('txtTen') !!}
-                                </div>
+                                <input id="new-pass-control" name="ten" class="span4" type="text" value="{!! old('txtTen') !!}" autocomplete="false">
+
                             </div>
                         </div>
                         <div class="control-group ">
                             <label class="control-label">Đơn vị tính</label>
                             <div class="controls">
-                                <select name="selDVT" id="input" class="form-control" >
+                                <select name="dvt" id="input" class="form-control" >
                                     <option value="">-- Chọn --</option>
+                                    @foreach ($donvitinh as $item)
+                                    <option value="{{ $item->id }}">{{ $item->dvt_ten }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="control-group ">
                             <label class="control-label">Nhóm vật tư</label>
                             <div class="controls">
-                                <select name="selNVT" id="input" class="form-control">
+                                <select name="nvt" id="input" class="form-control">
                                     <option value="">-- Chọn --</option>
+                                    @foreach ($nhomvattu as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nvt_ten }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -69,16 +71,22 @@
                         <div class="control-group ">
                             <label class="control-label">Xuất xứ</label>
                             <div class="controls">
-                                <select name="selNSX" id="input" class="form-control">
+                                <select name="nsx" id="input" class="form-control">
                                     <option value="">-- Chọn --</option>
+                                    @foreach ($nhasanxuat as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nsx_ten }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="control-group ">
                             <label class="control-label">Nhà phân phối</label>
                             <div class="controls">
-                                <select name="selNPP" id="input" class="form-control">
+                                <select name="npp" id="input" class="form-control">
                                     <option value="">-- Chọn --</option>
+                                    @foreach ($nhaphanphoi as $item)
+                                    <option value="{{ $item->id }}">{{ $item->npp_ten }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -86,15 +94,18 @@
                         <div class="control-group ">
                             <label class="control-label">Chất lượng</label>
                             <div class="controls">
-                                <select name="selCLuong" id="input" class="form-control">
+                                <select name="cl" id="input" class="form-control">
                                     <option value="">-- Chọn --</option>
+                                    @foreach ($chatluong as $item)
+                                    <option value="{{ $item->id }}">{{ $item->cl_ten }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="control-group ">
                             <label class="control-label">Giá</label>
                             <div class="controls">
-                                <input id="l" name="txtGia" class="span4" type="number" value="{!! old('txtGia') !!}" autocomplete="false">
+                                <input id="l" name="gia" class="span4" type="number" value="{!! old('txtGia') !!}" autocomplete="false">
                             </div>
                         </div>
                     </fieldset>
@@ -108,18 +119,19 @@
                     <div class="control-group ">
                         <label class="control-label">Kho</label>
                         <div class="controls">
-                            <select name="selKho" id="input" class="form-control">
+                            <select name="kho" id="input" class="form-control">
                                 <option value="">-- Chọn --</option>
+                                @foreach ($kho as $item)
+                                <option value="{{ $item->id }}">{{ $item->kho_ten }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="control-group ">
                         <label class="control-label">Số lượng</label>
                         <div class="controls">
-                            <input id="l" name="txtSLuong" class="span4" type="number" value="{!! old('txtSLuong') !!}" autocomplete="false">
-                            <div>
-                                {!! $errors->first('txtSLuong') !!}
-                            </div>
+                            <input id="l" name="sl" class="span4" type="number" value="{!! old('txtSLuong') !!}" autocomplete="false">
+
                         </div>
                     </div>
                 </fieldset>

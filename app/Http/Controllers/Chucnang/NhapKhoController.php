@@ -3,8 +3,16 @@
 namespace App\Http\Controllers\Chucnang;
 
 use App\Http\Controllers\Controller;
+use App\Models\ChatLuong;
+use App\Models\DonViTinh;
+use App\Models\Kho;
+use App\Models\NhaPhanPhoi;
+use App\Models\NhaSanXuat;
+use App\Models\NhomVatTu;
+use App\Models\VatTu;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class NhapKhoController extends Controller
 {
     /**
@@ -20,7 +28,17 @@ class NhapKhoController extends Controller
      */
     public function create()
     {
-        //
+        $donvitinh = DonViTinh::all();
+        $nhomvattu = NhomVatTu::all();
+        $nhasanxuat = NhaSanXuat::all();
+        $nhaphanphoi = NhaPhanPhoi::all();
+        $chatluong = ChatLuong::all();
+        $kho = Kho::all();
+        $vattu = VatTu::all();
+
+        $nv =DB::table('nhanvien')->where('user_id',Auth::user()->id)->first();
+        
+        return view('chucnang.nhapkho.create',compact('donvitinh','nhomvattu','nhasanxuat','nhaphanphoi','chatluong','kho','vattu','nv'));
     }
 
     /**

@@ -9,7 +9,14 @@
                         <small></small>
                     </h3>
                 </header>
-            </div>                      
+            </div>    
+        </div>
+        <div class="row">
+            @if (session('message'))
+            <div class="alert-success">
+                {{ session('message') }}
+            </div>
+            @endif
         </div>
     </div>
 </section>
@@ -21,7 +28,7 @@
             <div class="row">
                 <div class="span11">
                     <fieldset>
-                        <a href="{!! URL::route('kho.create') !!}" class="btn btn-info"><i class="icon-plus"></i>&nbspThêm</a>
+                        <a href="{{ route('kho.create') }}" class="btn btn-info"><i class="icon-plus"></i>&nbspThêm</a>
                         <a href="#" class="btn btn-info"><i class="icon-print"></i>&nbsp&nbspIn&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                     </fieldset>
                 </div>

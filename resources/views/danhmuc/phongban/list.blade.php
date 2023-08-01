@@ -5,7 +5,7 @@
         <div class="row">
             <div class="span7">
                 <header class="page-header">
-                    <h3>Quản lý Khu vực<br/>
+                    <h3>Quản lý phòng ban<br/>
                         <small></small>
                     </h3>
                 </header>
@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="span11">
                     <fieldset>
-                        <a href="{{ route('khuvuc.create') }}" class="btn btn-info"><i class="icon-plus"></i>&nbspThêm</a>
+                        <a href="{{ route('phongban.create') }}" class="btn btn-info"><i class="icon-plus"></i>&nbspThêm</a>
                         <a href="#" class="btn btn-info"><i class="icon-print"></i>&nbsp&nbspIn&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                     </fieldset>
                 </div>
@@ -44,22 +44,25 @@
         <table class="table table-bordered table-hover tablesorter" id="sample-table">
             <thead style="background:#EFEFEF;">
                 <tr>
-                    <th class="span3">Mã Khu vực</th>
-                    <th>Tên Khu vực</th>
+                    <th class="span3">Mã phòng ban</th>
+                    <th>Tên phòng ban</th>
                     <th class="span2"></th>
                 </tr>
             </thead>
             <tbody>
-            @foreach ($khuvuc as $item)
+            @foreach ($phongban as $item)
             <tr>
-                    <td>{!! $item->kv_ma !!}</td>
-                    <td>{!! $item->kv_ten !!}</td>
-                    <td class="td-actions">
-                        <form method="post" action="">
+                    <td>{!! $item->pb_ma !!}</td>
+                    <td>{!! $item->pb_ten !!}</td>
+                    <td>
+                        <form method="POST" action="{{ route('phongban.delete', ['id' => $item->id]) }}">
                             @csrf
-                            <a href="{{ route('khuvuc.show', ['id' => $item->id]) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('phongban.show', ['id' => $item->id]) }}" class="btn btn-primary">Edit</a>
                             <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                        <!-- {{-- @if($product->trashed()) --}}
+        
+                        {{-- @endif --}} -->
                     </td>
                 </tr>
             @endforeach 

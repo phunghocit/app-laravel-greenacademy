@@ -5,7 +5,7 @@
         <div class="row">
             <div class="span7">
                 <header class="page-header">
-                    <h3>Quản lý Nhà Phân Phối<br/>
+                    <h3>Quản lý Đơn vị tính<br/>
                         <small></small>
                     </h3>
                 </header>
@@ -20,16 +20,16 @@
         </div>
     </div>
 </section>
+@endsection
 
-@stop
 @section('main-content')
 <div class="span16" >
     <div class="box-header">
         <div class="row">
             <div class="span11">
                 <fieldset>
-                    <a href="{{ route('nhaphanphoi.create') }}" class="btn btn-info"><i class="icon-plus"></i>Thêm</a>
-                    <a href="#" class="btn btn-info"><i class="icon-print"></i>&nbsp&nbspIn&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a href="{{ route('donvitinh.create') }}" class="btn btn-info"><i class="icon-plus"></i>Thêm</a>
+                    <a href="#" class="btn btn-info"><i class="icon-print"></i>In</a>
                 </fieldset>
             </div>
             <div class="" >
@@ -44,39 +44,20 @@
     <table class="table table-bordered table-hover tablesorter" id="sample-table">
         <thead style="background:#EFEFEF;">
             <tr>
-                <th class="span2">Mã NPP</th>
-                <th class="span7">Tên NPP</th>
-                <th class="span6">Khu vực</th>
-                <th class="span5">Địa chỉ</th>
-                <th class="span2">SĐT</th>
-                <th class="span3">Email</th>
-                <th class="span2">Tài khoản</th>
-                <th class="span4">NV Đại diện</th>
-                <th class="span3"></th>
+                <th class="span3">Mã Đơn vị tính</th>
+                <th>Tên Đơn vị tính</th>
+                <th class="span2"></th>
             </tr>
         </thead>
         <tbody>
-        @foreach ($nhaphanphoi as $item)
+        @foreach ($donvitinh as $item)
         <tr>
-                <td>{!! $item->npp_ma !!}</td>
-                <td>{!! $item->npp_ten !!}</td>
+                <td>{!! $item->dvt_ma !!}</td>
+                <td>{!! $item->dvt_ten !!}</td>
                 <td>
-                    <?php $khuvuc = DB::table('khuvuc')->where('id',$item->kv_id)->first(); ?>
-                @if (!empty($khuvuc->kv_ten))
-                    {!! $khuvuc->kv_ten !!}
-                @else
-                    {!! NULL !!}
-                @endif
-                </td>
-                <td>{!! $item->npp_diachi !!}</td>
-                <td>{!! $item->npp_sdt !!}</td>
-                <td>{!! $item->npp_email !!}</td>
-                <td>{!! $item->npp_taikhoan !!}</td>
-                <td>{!! $item->npp_nhanviendaidien !!}</td>
-                <td>
-                    <form method="POST" action="{{ route('nhaphanphoi.delete', ['id' => $item->id]) }}">
+                    <form method="POST" action="{{ route('donvitinh.delete', ['id' => $item->id]) }}">
                         @csrf
-                        <a href="{{ route('nhaphanphoi.show', ['id' => $item->id]) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ route('donvitinh.show', ['id' => $item->id]) }}" class="btn btn-primary">Edit</a>
                         <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger">Delete</button>
                     </form>
                     <!-- {{-- @if($product->trashed()) --}}

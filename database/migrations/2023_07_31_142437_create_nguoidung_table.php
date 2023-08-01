@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('nhaphanphoi', function (Blueprint $table) {
-			$table->unsignedBigInteger('kv_id')->nullable();
-            $table->foreign('kv_id')->references('id')->on('khuvuc');
-            $table->softDeletes(); //deleted_at
+        Schema::create('nguoidung', function (Blueprint $table) {
+            $table->id();
+            $table->string('nd_ten',255)->nullable();
+            $table->timestamps();
         });
     }
 
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('nguoidung');
     }
 };

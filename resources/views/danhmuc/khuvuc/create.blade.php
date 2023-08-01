@@ -28,14 +28,18 @@
                         <label class="control-label">Mã Khu vực</label>
                         <div class="controls">
                             <input id="current-pass-control" name="ma" class="span4" type="text"  autocomplete="false">
-       
+                            @error('ma')
+                            <small style="color: red">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="control-group ">
                         <label class="control-label">Tên Khu vực</label>
                         <div class="controls">
                             <input id="new-pass-control" name="ten" class="span4" type="text"  autocomplete="false">
-
+                            @error('ten')
+                            <small style="color: red">{{ $message }}</small>
+                        @enderror
                         </div>
                     </div>
                 </fieldset>

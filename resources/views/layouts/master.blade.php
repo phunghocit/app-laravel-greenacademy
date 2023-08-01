@@ -272,19 +272,19 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('nhomvattu.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Nhóm vật tư</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('donvitinh.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Đơn vị tính</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('chatluong.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Chất lượng</p>
                 </a>
@@ -296,19 +296,19 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('congtrinh.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Công trình</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('phongban.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Phòng ban</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('nhanvien.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Nhân viên</p>
                 </a>

@@ -20,8 +20,9 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->dateTime('dob')->nullable();
-            //0 - user , 1 - superadmin, 2 - admin, 3 - manager 
-            $table->integer('role')->unsigned()->default(0);
+            // //0 - user , 1 - superadmin, 2 - admin, 3 - manager 
+            // $table->integer('role')->unsigned();
+
         });
     }
 

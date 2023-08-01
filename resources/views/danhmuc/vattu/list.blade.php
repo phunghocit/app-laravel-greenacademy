@@ -48,7 +48,64 @@
                 </tr>
             </thead>
             <tbody>
-                 
+                @foreach ($vattu as $item)
+                <tr>
+                    <td>{!! $item->vt_ma !!}</td>
+                    <td>{!! $item->vt_ten !!}</td>
+                    <td>
+                        <?php $donvitinh = DB::table('donvitinh')->where('id',$item->dvt_id)->first(); ?>
+                        @if (!empty($donvitinh->dvt_ten))
+                        {!! $donvitinh->dvt_ten !!}
+                        @else
+                        {!! NULL !!}
+                        @endif
+                    </td>
+                    <td>
+                        <?php $nhomvattu = DB::table('nhomvattu')->where('id',$item->nvt_id)->first(); ?>
+                        @if (!empty($nhomvattu->nvt_ten))
+                        {!! $nhomvattu->nvt_ten !!}
+                        @else
+                        {!! NULL !!}
+                        @endif
+                    </td>
+                    <td>
+                        <?php $nhasanxuat = DB::table('nhasanxuat')->where('id',$item->nsx_id)->first(); ?>
+                        @if (!empty($nhasanxuat->nsx_ten))
+                        {!! $nhasanxuat->nsx_ten !!}
+                        @else
+                        {!! NULL !!}
+                        @endif
+                    </td>
+                    <td>
+                        <?php $nhaphanphoi = DB::table('nhaphanphoi')->where('id',$item->npp_id)->first(); ?>
+                        @if (!empty($nhaphanphoi->npp_ten))
+                        {!! $nhaphanphoi->npp_ten !!}
+                        @else
+                        {!! NULL !!}
+                        @endif
+                    </td>
+                    
+                    <td>
+                        <?php $chatluong = DB::table('chatluong')->where('id',$item->cl_id)->first(); ?>
+                        @if (!empty($chatluong->cl_ten))
+                        {!! $chatluong->cl_ten !!}
+                        @else
+                        {!! NULL !!}
+                        @endif
+                    </td>
+                    <td>{!! number_format("$item->vt_gia",0,",",".")  !!} vnđ</td>
+                    <td>
+                        <form method="POST" action="{{ route('vattu.delete', ['id' => $item->id]) }}">
+                            @csrf
+                            <a href="{{ route('vattu.show', ['id' => $item->id]) }}" class="btn btn-primary">Edit</a>
+                            <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                        <!-- {{-- @if($product->trashed()) --}}
+        
+                        {{-- @endif --}} -->
+                    </td>
+                </tr>
+            @endforeach    
             </tbody>
         </table>
     </div>

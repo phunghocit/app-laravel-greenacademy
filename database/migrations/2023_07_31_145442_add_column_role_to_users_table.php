@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('nhaphanphoi', function (Blueprint $table) {
-			$table->unsignedBigInteger('kv_id')->nullable();
-            $table->foreign('kv_id')->references('id')->on('khuvuc');
-            $table->softDeletes(); //deleted_at
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('role')->default(3);
+            $table->foreign('role')->references('id')->on('nguoidung');
         });
     }
 
@@ -23,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

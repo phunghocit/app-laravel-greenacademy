@@ -6,15 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class NhomVatTuController extends Controller
+class ChatLuongController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $nhomvattu = DB::table('nhomvattu')->get();
-        return view('danhmuc.nhomvattu.list', compact('nhomvattu'));
+        $chatluong = DB::table('chatluong')->get();
+        return view('danhmuc.chatluong.list', compact('chatluong'));
     }
 
     /**
@@ -22,7 +22,7 @@ class NhomVatTuController extends Controller
      */
     public function create()
     {
-        return view('danhmuc.nhomvattu.create');
+        return view('danhmuc.chatluong.create');
     }
 
     /**
@@ -30,13 +30,14 @@ class NhomVatTuController extends Controller
      */
     public function store(Request $request)
     {
-        $nhomvattu = DB::table('nhomvattu')->insert([
-            'nvt_ma' => $request->ma,
-            'nvt_ten'=> $request->ten,
+        $data = DB::table('chatluong')->insert([
+            'cl_ma' => $request->ma,
+            'cl_ten'=> $request->ten,
+ 
             ]);
-            $msg = $nhomvattu ? 'Thêm mới thành công!' : 'Thêm mới thất bại!';
+            $msg = $data ? 'Thêm khu vực mới thành công!' : 'Thêm khu vực mới thất bại!';
     
-            return redirect()->route('nhomvattu.index')->with('message', $msg);
+            return redirect()->route('chatluong.index')->with('message', $msg);
     }
 
     /**
@@ -44,8 +45,8 @@ class NhomVatTuController extends Controller
      */
     public function show(string $id)
     {
-        $data = DB::table('nhomvattu')->where('id', $id)->first();
-		return view('danhmuc.nhomvattu.update', ['data' => $data]);
+        $data = DB::table('chatluong')->where('id', $id)->first();
+		return view('danhmuc.chatluong.update', ['data' => $data]);
     }
 
     /**
@@ -61,15 +62,16 @@ class NhomVatTuController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $check = DB::table('nhomvattu')
+        $check = DB::table('chatluong')
         ->where('id', $id)
         ->update([
-            'nvt_ten'=> $request->ten,
+            'cl_ten'=> $request->ten,
         ]);
 
         $message = $check ? 'Cập nhật thành công' : 'Cập nhật thất bại';
 
-        return redirect()->route('nhomvattu.index')->with('message', $message);
+        return redirect()->route('chatluong.index')->with('message', $message);
+        
     }
 
     /**
@@ -77,10 +79,8 @@ class NhomVatTuController extends Controller
      */
     public function destroy(string $id)
     {
-        $check = DB::table('nhomvattu')->where('id',$id)->delete();
-        // $productCategory = Kho::find($id);
-        // $check = $productCategory->delete();
+        $check = DB::table('chatluong')->where('id',$id)->delete();
         $message = $check ? 'Xoá thành công!' : 'Xoá thất bại!';
-		return redirect()->route('nhomvattu.index')->with('message', $message);
+		return redirect()->route('danhmuc.chatluong.index')->with('message', $message);
     }
 }

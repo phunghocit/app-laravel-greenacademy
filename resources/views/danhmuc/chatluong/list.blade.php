@@ -5,7 +5,7 @@
         <div class="row">
             <div class="span7">
                 <header class="page-header">
-                    <h3>Quản lý Khu vực<br/>
+                    <h3>Quản lý chất lượng<br/>
                         <small></small>
                     </h3>
                 </header>
@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="span11">
                     <fieldset>
-                        <a href="{{ route('khuvuc.create') }}" class="btn btn-info"><i class="icon-plus"></i>&nbspThêm</a>
+                        <a href="{{ route('chatluong.create') }}" class="btn btn-info"><i class="icon-plus"></i>&nbspThêm</a>
                         <a href="#" class="btn btn-info"><i class="icon-print"></i>&nbsp&nbspIn&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                     </fieldset>
                 </div>
@@ -44,20 +44,20 @@
         <table class="table table-bordered table-hover tablesorter" id="sample-table">
             <thead style="background:#EFEFEF;">
                 <tr>
-                    <th class="span3">Mã Khu vực</th>
-                    <th>Tên Khu vực</th>
+                    <th class="span3">Mã chất lượng</th>
+                    <th>Tên chất lượng</th>
                     <th class="span2"></th>
                 </tr>
             </thead>
             <tbody>
-            @foreach ($khuvuc as $item)
+            @foreach ($chatluong as $item)
             <tr>
-                    <td>{!! $item->kv_ma !!}</td>
-                    <td>{!! $item->kv_ten !!}</td>
+                    <td>{!! $item->cl_ma !!}</td>
+                    <td>{!! $item->cl_ten !!}</td>
                     <td class="td-actions">
                         <form method="post" action="">
                             @csrf
-                            <a href="{{ route('khuvuc.show', ['id' => $item->id]) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('chatluong.show', ['id' => $item->id]) }}" class="btn btn-primary">Edit</a>
                             <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>

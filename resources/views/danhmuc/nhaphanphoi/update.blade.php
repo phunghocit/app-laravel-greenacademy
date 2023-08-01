@@ -6,7 +6,7 @@
             <div class="span7">
                 <header class="page-header">
                     <h3>Quản lý Kho<br/>
-                        <small>Thêm</small>
+                        <small>Sửa</small>
                     </h3>
                 </header>
             </div>

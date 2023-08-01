@@ -1,5 +1,6 @@
 <?php
 
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
