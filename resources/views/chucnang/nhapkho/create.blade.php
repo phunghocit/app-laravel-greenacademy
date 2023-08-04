@@ -5,7 +5,7 @@
 @section('main-content')
 
 <div class="row">
-    <div class="span3">
+    {{-- <div class="span3">
         <div class="box">
             <div class="box-header">
                 <p><b>Chức năng</b></p>
@@ -20,7 +20,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div style="margin-left:-1px" class="span13">
         <div class="box">
             <div class="box-header">
@@ -32,12 +32,12 @@
                         <div class="row">
                             <div id="acct-password-row" class="span13">
                             <form action="" method="POST" accept-charset="utf-8">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                @csrf
                                 <div id="acct-password-row" class="span8">
                                     <fieldset>
                                         <div class="control-group ">
                                             <label>Tên NPP:</label>
-                                            <select  class="span7" name="state_id" id="state_id">
+                                            <select  class="span7" name="npp_id" id="state_id">
                                                 <option>--Chọn--</option>
                                                 @foreach($nhaphanphoi as $item)
                                                     <option value="{{ $item->id }}" >{{ $item->npp_ten }}</option>
@@ -66,7 +66,7 @@
                                             <input type="text" name="date" value="{!! date('d-m-Y') !!}" class="span3">
                                         </div>
                                         <div>
-                                            <button type="submit" class="btn btn-primary"><i class="icon-save"></i>&nbsp&nbsp&nbspLưu</button>
+                                            <button type="submit" class="btn btn-primary"><i class="icon-save"></i>Lưu</button>
                                         </div>
                                     </fieldset>
                                 </div>
@@ -78,7 +78,7 @@
                                     </fieldset>                    
                                 </div>
                                 </form>
-                                <form action="" method="POST" accept-charset="utf-8">
+                                <form action="{{ route('cart.add') }}" method="POST" accept-charset="utf-8">
                                     @csrf
                                     <div id="acct-password-row" class="span13">
                                         <fieldset>
@@ -92,14 +92,17 @@
                                                     </select>                                                
                                                 <label>Tên:</label>
                                                     <select name="ten" class=" span4">
-                                                        <option value="dây điện"></option>
+                                                        <option>--Chọn--</option>
+                                                        @foreach($vattu as $item)
+                                                        <option value="{{ $item->id }}" >{{ $item->vt_ten }}</option>
+                                                         @endforeach
                                                     </select>
                                                 <label>ĐVT:</label>
                                                     <select class="span2" name="dvt" >
                                                         <option value="Mét" ></option>
                                                     </select>
                                                 <label>Kho:</label>
-                                                    <select class="selKho span3" name="kho" id="kho">
+                                                    <select class="kho span3" name="kho" id="kho">
                                                     <option>--Chọn--</option>
                                                         @foreach($kho as $item)
                                                         <option value="{{ $item->id}}">{{ $item->kho_ten}}</option>
@@ -108,15 +111,17 @@
                                             </div>
                                             <div class="control-group">
                                                 <label>Số lượng:</label>
-                                                <input type="number" name="sl" class="span2">
-                                                <a href="#" class="add1 btn btn-default" type="submit"><i class="icon-plus"></i>Thêm</a>
+                                                <input type="number" name="qty" class="span2">
+                                                {{-- <a href="#" class="add1 btn btn-default" type="submit"><i class="icon-plus"></i>Thêm</a> --}}
+                                                <button  type="submit"><i class="icon-plus"></i>Thêm</button>
+                                                
                                             </div>
                                         </fieldset>
 
                                     </div>
                                     
                                 </form>
-                                {{-- <div id="acct-password-row" class="span12">
+                                <div id="acct-password-row" class="span12">
                                     <div>
                                     <form action="" method="POST" accept-charset="utf-8">
                                         @csrf
@@ -134,32 +139,85 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($content as $item)
-                                                <tr>
+                                                <?php
+                                                $totalPrice = 0;
+                                                if(session()->has('cart')){
+                                                    foreach (session()->get('cart') as $item) { ?>
+                                                    <tr>
+                                                        <td>{{ $item['id'] }}</td>
+                                                        <td>{{ $item['ten'] }}</td>
+                                                        <td>{{ $item['kho'] }}</td>
+                                                        <td>{{ $item['dvt'] }}</td>
+                                                        <td>{{ $item['qty'] }}</td>
+                                                        {{-- <td>{{ $item['gia'] }}</td>
+                                                        <td>{{ $item['thanhtien'] }}</td> --}}
+                                                        <td>{{ number_format($item['gia'],0,",",".") }} vnđ</td>
+                                                        <td>{{ number_format($item['thanhtien'],0,",",".") }}vnđ</td>
+                                                        <td class="td-actions">
+                                                            <a  class="del btn btn-small btn-danger" name="id"><i class="btn-icon-only icon-remove"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                    }
+                                                }?>
+                                                {{-- @foreach($cart as $item) --}}
+                                                {{-- <tr>
                                                     <td>{{ $item['id'] }}</td>
-                                                    <td>{{ $item['name'] }}</td>
-                                                    <td>{{ $item->options->kho }}</td>
-                                                    <td>{{ $item->options->size }}</td>
+                                                    <td>{{ $item['ten'] }}</td>
+                                                    <td>{{ $item['kho'] }}</td>
+                                                    <td>{{ $item['dvt'] }}</td>
                                                     <td>{{ $item['qty'] }}</td>
-                                                    <td>{{ number_format($item['price'],0,",",".") }} vnđ</td>
-                                                    <td>{{ number_format($item['qty']*$item['price'],0,",",".") }}vnđ</td>
+                                                    <td>{{ $item['gia'] }}</td>
+                                                    <td>{{ $item['thanhtien'] }}</td>
+                                                    <td>{{ number_format($item['gia'],0,",",".") }} vnđ</td>
+                                                    <td>{{ number_format($item['qty']*$item['gia'],0,",",".") }}vnđ</td>
                                                     <td class="td-actions">
                                                         <a  class="del btn btn-small btn-danger" name="id" id="{{$item['rowid']}}"><i class="btn-icon-only icon-remove"></i></a>
                                                     </td>
-                                                </tr>
-                                                @endforeach
-                                            
+                                                </tr> --}}
+                                                {{-- @endforeach --}}
+                             
                                             </tbody>
                                         </table>
                                         </form>
                                     </div>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+       
     </div>
 @endsection
+@section('js-custom')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.product-add-to-cart').on('click', function(event){
+                event.preventDefault();
+                var url = $(this).data('url');
 
+                $.ajax({
+                    method: 'GET', //method of form
+                    url: url, // action of form
+                    success: function(res) {
+                        var total_price = res.total_price;
+                        var total_product = res.total_product;
+                        Swal.fire({
+                            icon: 'success',
+                            text: res.message,
+                        });
+                        $('#total_product').html(total_product);
+                        $('#total_price').html('$'+total_price);
+                    },
+                    statusCode: {
+                        401: function() {
+                            window.location.href = "{{ route('login') }}";
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+@endsection

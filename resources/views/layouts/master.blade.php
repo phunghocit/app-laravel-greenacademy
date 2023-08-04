@@ -32,7 +32,22 @@
     <link rel="stylesheet" href="{{ asset('master/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('master/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('master/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-</head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> --}}
+    {{-- ============================test --}}
+    <script src="{{ asset('lib/js/myjs.js')}}"></script>
+
+    <script src="{{ asset('bootstrapnew/js/bootstrap.min.js')}}"></script>
+
+    <script src="{{ asset('bootstrapnew/css/bootstrap.min.css')}}"></script>
+    
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+    <script src="{{ asset('lib/js/jquery/jquery-1.12.3.min.js')}}" type="text/javascript" ></script>
+
+    <link href="{{ asset('lib/css/customize-template.css')}}" type="text/css" media="screen, projection" rel="stylesheet" />
+  </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -414,7 +429,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          @yield('header-content')
+            @yield('header-content')
             <!-- <h1 class="m-0">Starter Page</h1> -->
           </div><!-- /.col -->
           <!-- <div class="col-sm-6">
@@ -430,7 +445,11 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    @yield('main-content')
+    <section class="content">
+      <div class="container-fluid">
+      @yield('main-content')
+  </div><!-- /.container-fluid -->
+</section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -494,7 +513,36 @@
 <!-- <script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>
 <script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script> -->
 <script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+{{-- ====================================================== --}}
+<script src="{{ asset('lib/js/jquery/jquery-tablesorter.js')}}" type="text/javascript" ></script>
 
+<script src="{{ asset('lib/js/bootstrap/bootstrap-collapse.js')}}" type="text/javascript" ></script>
+
+<script src="{{ asset('lib/js/bootstrap/bootstrap-modal.js')}}" type="text/javascript" ></script>
+
+<script src="{{ asset('lib/js/bootstrap/bootstrap-transition.js')}}" type="text/javascript" ></script>
+<script src="{{ asset('lib/js/bootstrap/bootstrap-alert.js')}}" type="text/javascript" ></script>
+
+<script src="{{ asset('lib/js/bootstrap/bootstrap-dropdown.js')}}" type="text/javascript" ></script>
+<script src="{{ asset('lib/js/bootstrap/bootstrap-scrollspy.js')}}" type="text/javascript" ></script>
+<script src="{{ asset('lib/js/bootstrap/bootstrap-tab.js')}}" type="text/javascript" ></script>
+<script src="{{ asset('lib/js/bootstrap/bootstrap-tooltip.js')}}" type="text/javascript" ></script>
+<script src="{{ asset('lib/js/bootstrap/bootstrap-popover.js')}}" type="text/javascript" ></script>
+<script src="{{ asset('lib/js/bootstrap/bootstrap-button.js')}}" type="text/javascript" ></script>
+
+<script src="{{ asset('lib/js/bootstrap/bootstrap-carousel.js')}}" type="text/javascript" ></script>
+<script src="{{ asset('lib/js/bootstrap/bootstrap-typeahead.js')}}" type="text/javascript" ></script>
+<script src="{{ asset('lib/js/bootstrap/bootstrap-affix.js')}}" type="text/javascript" ></script>
+<script src="{{ asset('lib/js/bootstrap/bootstrap-datepicker.js')}}" type="text/javascript" ></script>
+
+<script src="{{ asset('lib/js/jquery/jquery-chosen.js')}}" type="text/javascript" ></script>
+<script src="{{ asset('lib/js/jquery/virtual-tour.js')}}" type="text/javascript" ></script>
+{{-- ====================================================== --}}
+
+{{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> --}}
 @yield('js-custom')
 
 </body>

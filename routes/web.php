@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\ChucNang\CartController;
 use App\Http\Controllers\Chucnang\NhapKhoController;
 use App\Http\Controllers\Danhmuc\ChatLuongController;
 use App\Http\Controllers\Danhmuc\CongTrinhController;
@@ -164,6 +165,9 @@ Route::middleware('auth')->group(function () {
     ->name('nhapkho.update');
     Route::post('nhapkho/delete/{id}', [NhapKhoController::class, 'destroy'])
     ->name('nhapkho.delete');
+    // ==============Cart===============
+    Route::post('addcart', [CartController::class, 'addToCart'])->name('cart.add');
+
 
 });
 

@@ -35,10 +35,10 @@ class NhapKhoController extends Controller
         $chatluong = ChatLuong::all();
         $kho = Kho::all();
         $vattu = VatTu::all();
-
+ 
         $nv =DB::table('nhanvien')->where('user_id',Auth::user()->id)->first();
-        
-        return view('chucnang.nhapkho.create',compact('donvitinh','nhomvattu','nhasanxuat','nhaphanphoi','chatluong','kho','vattu','nv'));
+        $cart = session()->get('cart') ?? [];
+        return view('chucnang.nhapkho.create',compact('donvitinh','nhomvattu','nhasanxuat','nhaphanphoi','chatluong','kho','vattu','nv','cart'));
     }
 
     /**
@@ -46,7 +46,7 @@ class NhapKhoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
