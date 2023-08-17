@@ -1,30 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Chucnang;
+namespace App\Http\Controllers\ChucNang;
 
 use App\Http\Controllers\Controller;
-use App\Models\ChatLuong;
-use App\Models\ChiTietNhapKho;
-use App\Models\DonViTinh;
+use App\Models\ChiTietXuatKho;
+use App\Models\CongTrinh;
 use App\Models\Kho;
-use App\Models\NhaPhanPhoi;
-use App\Models\NhapKho;
-use App\Models\NhaSanXuat;
-use App\Models\NhomVatTu;
 use App\Models\VatTu;
-use App\Models\VatTuKho;
+use App\Models\XuatKho;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-class NhapKhoController extends Controller
+
+class XuatKhoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = DB::table('nhapkho')->get();
-        return view('chucnang.nhapkho.list', compact('data'));
+        $data = DB::table('xuatkho')->get();
+        return view('chucnang.xuatkho.list', compact('data'));
     }
 
     /**
@@ -32,25 +28,24 @@ class NhapKhoController extends Controller
      */
     public function create()
     {
-        // session()->forget('cart');
-        $donvitinh = DonViTinh::all();
-        $nhomvattu = NhomVatTu::all();
-        $nhasanxuat = NhaSanXuat::all();
-        $nhaphanphoi = NhaPhanPhoi::all();
-        $chatluong = ChatLuong::all();
+        // $donvitinh = DonViTinh::all();
+        // $nhomvattu = NhomVatTu::all();
+        // $nhasanxuat = NhaSanXuat::all();
+        // $nhaphanphoi = NhaPhanPhoi::all();
+        // $chatluong = ChatLuong::all();
         $kho = Kho::all();
+        $congtrinh = CongTrinh::all();
         $vattu = VatTu::all();
  
-        $nv =DB::table('nhanvien')->where('user_id',Auth::user()->id)->first();
+        $nv = DB::table('nhanvien')->where('user_id',Auth::user()->id)->first();
         $cart = session()->get('cart') ?? [];
-        return view('chucnang.nhapkho.create',compact('donvitinh','nhomvattu','nhasanxuat','nhaphanphoi','chatluong','kho','vattu','nv','cart'));
+        return view('chucnang.xuatkho.create',compact('nv','cart','congtrinh','vattu','kho'));
     }
 
     /**
-     * Store a newly created resource in storage.                   
+     * Store a newly created resource in storage.
      */
-    
-     public function calculateTotalPrice(array $cart){
+    public function calculateTotalPrice(array $cart){
         $totalPrice = 0;
         foreach($cart as $item){
             $totalPrice += $item['qty'] * $item['gia'];
@@ -69,21 +64,22 @@ class NhapKhoController extends Controller
         // $vattu->vt_ma = $request->ma;
 		// $content = $cart->content();
 		// $total = $cart->total();
-		$nhapkho = new NhapKho;
-		$nhapkho->nk_ma = $request->id;
-		$nhapkho->nk_ngaylap = date('Y-m-d');
-		$nhapkho->nk_lydo = $request->lydo;
-		$nhapkho->nk_tongtien = $totalPrice;
-		$nhapkho->npp_id =  $request->npp_id ;
-		$nhapkho->nv_id = $request->nv;
-		$nhapkho->save();
+		$xuatkho = new XuatKho();
+		$xuatkho->xk_ma = $request->id;
+		$xuatkho->xk_ngaylap = date('Y-m-d');
+		$xuatkho->xk_lydo = $request->lydo;
+		$xuatkho->xk_diachi = $request->diachi;
+		$xuatkho->xk_tongtien = $totalPrice;
+		$xuatkho->ct_id =  $request->ct_id ;
+		$xuatkho->nv_id = $request->nv;
+		$xuatkho->save();
         // dd($cart);
 		foreach ($cart as  $item) {
-			$chitiet = new ChiTietNhapKho;
-			$chitiet->ctnk_soluong = $item['qty'];
-			$chitiet->ctnk_thanhtien = $item['qty']*$item['gia'];
+			$chitiet = new ChiTietXuatKho();
+			$chitiet->ctxk_soluong = $item['qty'];
+			$chitiet->ctxk_thanhtien = $item['qty']*$item['gia'];
 			$chitiet->vt_id = $item['id'];
-			$chitiet->nk_id = $nhapkho->id;
+			$chitiet->xk_id = $xuatkho->id;
 			$chitiet->save();
 			$vt = DB::table('vattukho')
 				->where(
@@ -92,7 +88,6 @@ class NhapKhoController extends Controller
 				->where('kho_id',$item['kho']
 					)
 				->first();
-                // dd($vt);
 			if (!is_null($vt)) {
 				DB::table('vattukho')
 				->where(
@@ -101,27 +96,18 @@ class NhapKhoController extends Controller
 				->where('kho_id',$item['kho']
 					)
 				->update([
-					'sl_nhap' => $vt->sl_nhap + $item['qty'],
-					'sl_ton' => $vt->sl_ton + $item['qty'],
+					'sl_xuat' => $vt->sl_xuat + $item['qty'],
+					'sl_ton' => $vt->sl_ton - $item['qty'],
 					]);
 				
-			} else {
-				$soluong = new VatTuKho;
-				$soluong->vt_id = $item['id'];
-				$soluong->kho_id = $item['kho'];
-				$soluong->sl_nhap = $item['qty'];
-				$soluong->sl_ton = $item['qty'];
-				$soluong->sl_xuat = 0;
-				$soluong->save();
-			}
+			} 
 		}
 
 		// session()->destroy();
         session()->forget('cart');
 
         // return view('chucnang.nhapkho.list');
-        return redirect()->route('nhapkho.index');
-
+        return redirect()->route('xuatkho.index');
     }
 
     /**

@@ -64,6 +64,7 @@ class VatTuController extends Controller
 	// 	'sl_xuat' => 0,
     // ]);
 
+    $kho = Kho::all();
     $vattu = new VatTu;
     $vattu->vt_ma = $request->ma;
     $vattu->vt_ten = $request->ten;
@@ -74,13 +75,25 @@ class VatTuController extends Controller
     $vattu->npp_id = $request->npp;
     $vattu->vt_gia = $request->gia;
     $vattu->save();
-    $soluong = new VatTuKho;
-    $soluong->vt_id = $vattu->id;
-    $soluong->kho_id = $request->kho;
-    $soluong->sl_nhap = $request->sl;
-    $soluong->sl_ton = $request->sl;
-    $soluong->sl_xuat = 0;
-    $soluong->save();
+    foreach ($kho as $item) {
+        if ($request->kho != $item->id) {
+        $soluong = new VatTuKho;
+        $soluong->vt_id = $vattu->id;
+        $soluong->kho_id = $item->id;
+        $soluong->sl_nhap = 0;
+        $soluong->sl_ton = 0;
+        $soluong->sl_xuat = 0;
+        $soluong->save();
+        }else{
+            $soluong = new VatTuKho;
+            $soluong->vt_id = $vattu->id;
+            $soluong->kho_id = $request->kho;
+            $soluong->sl_nhap = $request->sl;
+            $soluong->sl_ton = $request->sl;
+            $soluong->sl_xuat = 0;
+            $soluong->save();
+        }
+    }
 		return redirect()->route('vattu.index')->with(['flash_level'=>'success','flash_message'=>'Thêm thành công!!!']);
     }
 

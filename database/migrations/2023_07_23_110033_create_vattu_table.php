@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('vt_ma',255)->nullable();
 			$table->string('vt_ten',255)->nullable();
-			$table->integer('vt_soluong')->nullable();
+			// $table->integer('vt_soluong')->nullable();
 			// $table->unsignedBigInteger('dvt_id')->nullable();
             // $table->foreign('dvt_id')->references('id')->on('donvitinh');
 			// $table->unsignedBigInteger('nvt_id')->nullable();

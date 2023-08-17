@@ -65,6 +65,7 @@ class NhanVienController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->dob = $request->ngaysinh;
         $user->role = $request->quyen;
         $user->remember_token = $request->_token;
         $user->save();

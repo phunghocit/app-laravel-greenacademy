@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('ctnk_soluong')->unsigned()->nullable();
 			$table->float('ctnk_thanhtien')->unsigned()->nullable();
-			// $table->unsignedBigInteger('vt_id')->nullable();
-            // $table->foreign('vt_id')->references('id')->on('vattu');
-            // $table->unsignedBigInteger('nk_id')->nullable();
-            // $table->foreign('nk_id')->references('id')->on('nhapkho');
+			$table->unsignedBigInteger('vt_id')->nullable();
+            $table->foreign('vt_id')->references('id')->on('vattu');
+            $table->unsignedBigInteger('nk_id')->nullable();
+            $table->foreign('nk_id')->references('id')->on('nhapkho');
             $table->timestamps();
         });
     }

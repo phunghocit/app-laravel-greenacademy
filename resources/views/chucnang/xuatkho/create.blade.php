@@ -24,25 +24,29 @@
     <div style="margin-left:-1px" class="span13">
         <div class="box">
             <div class="box-header">
-                <p><b>Nhập kho thông thường</b></p>
+                <p><b>Thông tin phiếu xuất</b></p>
             </div>
             <div class="box-content">
                 <div class="form-inline">
                     <div class="container">
                         <div class="row">
                             <div id="acct-password-row" class="span13">
-                            <form action="{{ route('nhapkho.save') }}" method="POST" accept-charset="utf-8">
-                                @csrf
+                                <form action="{{ route('xuatkho.save') }}" method="POST" accept-charset="utf-8">
+                                    @csrf
                                 <div id="acct-password-row" class="span8">
                                     <fieldset>
                                         <div class="control-group ">
-                                            <label>Tên NPP:</label>
-                                            <select  class="span7" name="npp_id" id="state_id">
+                                            <label>Tên CT:</label>
+                                            <select  class="span7" name="ct_id" id="selCT">
                                                 <option>--Chọn--</option>
-                                                @foreach($nhaphanphoi as $item)
-                                                    <option value="{{ $item->id }}" >{{ $item->npp_ten }}</option>
+                                                @foreach($congtrinh as $item)
+                                                    <option value="{{ $item->id }}" >{{ $item->ct_ten }}</option>
                                                 @endforeach
                                             </select>
+                                        </div>
+                                        <div class="control-group">
+                                            <label>Địa chỉ:</label>
+                                            <input type="text" name="diachi" class="span7">
                                         </div>
                                         <div class="control-group">
                                             <label>Lý do:</label>
@@ -50,6 +54,10 @@
                                         </div>
                                         <div class="control-group">
                                             <label>Nhân viên:</label>
+                                            <?php 
+                                                $nv = DB::table('nhanvien')->where('user_id',Auth::user()->id)->first();
+
+                                            ?>
                                             <input type="text" value="{{ $nv->nv_ten}}" class="span7">
                                             <input type="hidden" name="nv" value="{{ $nv->id }}">
                                         </div>
@@ -59,23 +67,14 @@
                                     <fieldset>
                                         <div class="control-group ">
                                             <label>Mã phiếu:</label>
-                                            <input type="text" name="id" value="PNK{!! date('dmYhms') !!}" class="span3">
+                                            <input type="text" name="id" value="PXK{!! date('dmYhms') !!}" class="span3">
                                         </div>
                                         <div class="control-group">
-                                            <label>Ngày lập:&nbsp</label>
-                                            <input type="text" name="date" value="{!! date('d-m-Y') !!}" class="span3">
-                                        </div>
-                                        <div>
-                                            <button type="submit" class="btn btn-primary"><i class="icon-save"></i>Lưu</button>
+                                            <label>Ngày xuất:</label>
+                                            <input type="text" name="" value="{!! date('d-m-Y') !!}" class="span3">
                                         </div>
                                     </fieldset>
-                                </div>
-                                <div id="acct-password-row" class="span12">
-                                    <fieldset>
-                                        <div>
-                                            <u><p><b>Danh sách vật tư</b></p></u>
-                                        </div>
-                                    </fieldset>                    
+                                    <button type="submit" class="btn btn-primary"><i class="icon-save"></i>Lưu</button>
                                 </div>
                                 </form>
                                 <form action="{{ route('cart.add') }}"   method="POST" accept-charset="utf-8">
@@ -99,10 +98,10 @@
                                                     </select>
                                                 <label>ĐVT:</label>
                                                     <select class="span2" name="dvt" >
-                                                        <option value="Mét" ></option>
+                                                        <option value="Mét" >Mét</option>
                                                     </select>
                                                 <label>Kho:</label>
-                                                    <select class="kho span3" name="kho">
+                                                    <select class="kho span3" name="kho" id="kho">
                                                     <option>--Chọn--</option>
                                                         @foreach($kho as $item)
                                                         <option value="{{ $item->id}}">{{ $item->kho_ten}}</option>
@@ -123,8 +122,8 @@
                                 </form>
                                 <div id="acct-password-row" class="span12">
                                     <div>
-                                    <form action="" method="POST" accept-charset="utf-8">
-                                        @csrf
+                                        <form action="" method="POST" accept-charset="utf-8">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                         <table class="tb table table-bordered table-hover" id="myTable" name="myTable">
                                             <thead style="background:#EFEFEF;">
                                                 <tr>
@@ -139,6 +138,22 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            
+                                                {{-- @foreach($content as $item)
+                                                
+                                                <tr>
+                                                    <td>{{ $item['id'] }}</td>
+                                                    <td>{{ $item['name'] }}</td>
+                                                    <td>{{ $item->options->kho }}</td>
+                                                    <td>{{ $item->options->size }}</td>
+                                                    <td>{{ $item['qty'] }}</td>
+                                                    <td>{{ number_format($item['price'],0,",",".") }} vnđ</td>
+                                                    <td>{{ number_format($item['qty']*$item['price'],0,",",".") }}vnđ</td>
+                                                    <td class="td-actions">
+                                                        <a  class="del btn btn-small btn-danger" name="id" id="{{$item['rowid']}}"><i class="btn-icon-only icon-remove"></i></a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach --}}
                                                 <?php
                                                 $totalPrice = 0;
                                                 if(session()->has('cart')){
@@ -163,23 +178,6 @@
                                                 <?php
                                                     }
                                                 }?>
-                                                {{-- @foreach($cart as $item) --}}
-                                                {{-- <tr>
-                                                    <td>{{ $item['id'] }}</td>
-                                                    <td>{{ $item['ten'] }}</td>
-                                                    <td>{{ $item['kho'] }}</td>
-                                                    <td>{{ $item['dvt'] }}</td>
-                                                    <td>{{ $item['qty'] }}</td>
-                                                    <td>{{ $item['gia'] }}</td>
-                                                    <td>{{ $item['thanhtien'] }}</td>
-                                                    <td>{{ number_format($item['gia'],0,",",".") }} vnđ</td>
-                                                    <td>{{ number_format($item['qty']*$item['gia'],0,",",".") }}vnđ</td>
-                                                    <td class="td-actions">
-                                                        <a  class="del btn btn-small btn-danger" name="id" id="{{$item['rowid']}}"><i class="btn-icon-only icon-remove"></i></a>
-                                                    </td>
-                                                </tr> --}}
-                                                {{-- @endforeach --}}
-                             
                                             </tbody>
                                         </table>
                                         </form>
@@ -191,38 +189,10 @@
                 </div>
             </div>
         </div>
-       
     </div>
 @endsection
 @section('js-custom')
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('.product-add-to-cart').on('click', function(event){
-                event.preventDefault();
-                var url = $(form).attr('action');
 
-                $.ajax({
-                    type: 'POST', //method of form
-                    url: url, // action of form
-                    success: function(res) {
-                        Swal.fire({
-                            icon: 'success',
-                            text: res.message,
-                        });
-                    },
-                    error();: function(res) {
-                        Swal.fire({
-                            icon: 'error',
-                            text: res.message,
-                        });
-                    },
-                    // statusCode: {
-                    //     401: function() {
-                    //         window.location.href = "{{ route('login') }}";
-                    //     }
-                    // }
-                });
-            });
-        });
     </script>
 @endsection

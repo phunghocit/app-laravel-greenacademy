@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\ChucNang\BaoCaoController;
 use App\Http\Controllers\ChucNang\CartController;
+use App\Http\Controllers\ChucNang\ChuyenKhoController;
 use App\Http\Controllers\Chucnang\NhapKhoController;
+use App\Http\Controllers\ChucNang\XuatKhoController;
 use App\Http\Controllers\Danhmuc\ChatLuongController;
 use App\Http\Controllers\Danhmuc\CongTrinhController;
 use App\Http\Controllers\Danhmuc\DonViTinhController;
@@ -167,6 +170,36 @@ Route::middleware('auth')->group(function () {
     ->name('nhapkho.delete');
     // ==============Cart===============
     Route::post('addcart', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::post('deleteitemcart/{id}', [CartController::class, 'deleteItemInCart'])->name('cart.deleteitem');
+
+    // ==============Xuất kho===============
+    Route::get('/xuatkho', [XuatKhoController::class, 'index'])->name('xuatkho.index');
+    Route::get('xuatkho/create', [XuatKhoController::class, 'create'])->name('xuatkho.create');
+    Route::post('xuatkho/save', [XuatKhoController::class, 'store'])->name('xuatkho.save');
+    Route::get('xuatkho/{id}', [XuatKhoController::class, 'show'])->name('xuatkho.show');
+    Route::post('xuatkho/update/{id}', [XuatKhoController::class, 'update'])
+    ->name('xuatkho.update');
+    Route::post('xuatkho/delete/{id}', [XuatKhoController::class, 'destroy'])
+    ->name('xuatkho.delete');
+    // ==============Chuyển kho===============
+    Route::get('/chuyenkho', [ChuyenKhoController::class, 'index'])->name('chuyenkho.index');
+    Route::get('chuyenkho/create', [ChuyenKhoController::class, 'create'])->name('chuyenkho.create');
+    Route::post('chuyenkho/save', [ChuyenKhoController::class, 'store'])->name('chuyenkho.save');
+    Route::get('chuyenkho/{id}', [ChuyenKhoController::class, 'show'])->name('chuyenkho.show');
+    Route::post('chuyenkho/update/{id}', [ChuyenKhoController::class, 'update'])
+    ->name('chuyenkho.update');
+    Route::post('chuyenkho/delete/{id}', [ChuyenKhoController::class, 'destroy'])
+    ->name('chuyenkho.delete');
+    // ==============Kho Hàng===============
+    Route::get('baocao', function (){
+        return view('chucnang.baocao.list');
+    })->name('baocao.index');
+    // Route::get('/khohang', [BaoCaoController::class, 'khohang'])->name('khohang');
+    Route::get('/khothekho', [BaoCaoController::class, 'thekho'])->name('khothekho');
+    Route::get('/tongkho', [BaoCaoController::class, 'tongkho'])->name('tongkho');
+    Route::get('/khonhomvattu', [BaoCaoController::class, 'nhomvattu'])->name('khonhomvattu');
+    Route::get('/khochatluong', [BaoCaoController::class, 'chatluong'])->name('khochatluong');
+    Route::get('/khonhaphanphoi', [BaoCaoController::class, 'nhaphanphoi'])->name('khonhaphanphoi');
 
 
 });

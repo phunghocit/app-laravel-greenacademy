@@ -28,8 +28,8 @@
         <div class="row">
             <div class="span11">
                 <fieldset>
-                    <a href="{{ route('nhanvien.create') }}" class="btn btn-info"><i class="icon-plus"></i>Thêm</a>
-                    <a href="#" class="btn btn-info"><i class="icon-print"></i>&nbsp&nbspIn&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a href="{{ route('nhanvien.create') }}" class="btn btn-info"><i class="icon-plus"></i> Thêm</a>
+                    <a href="#" class="btn btn-info"><i class="icon-print"></i> In</a>
                 </fieldset>
             </div>
             <div class="" >

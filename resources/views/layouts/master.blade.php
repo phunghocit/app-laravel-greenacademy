@@ -189,7 +189,7 @@
           <img src="{{ asset('master/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Phùng Học</a>
+          <a href="#" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -204,8 +204,6 @@
           </div>
         </div>
       </div>
-
-
            <!-- Sidebar Menu -->
            <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -220,6 +218,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @if(Auth::user()->role == 1 ||Auth::user()->role == 2 ||Auth::user()->role == 4) 
               <li class="nav-item">
                 <a href="{{ route('logout')}}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
@@ -227,7 +226,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('profile.update')}}" class="nav-link">
+                <a href="{{ route('nhanvien.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tạo tài khoản</p>
                 </a>
@@ -252,8 +251,32 @@
               </li>
             </ul>
           </li>
-          <!-- ========================================================================= -->
-          <li class="nav-item menu-open">
+          @elseif (Auth::user()->role == 3)
+          <li class="nav-item">
+            <a href="{{ route('logout')}}" class="nav-link active">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Đăng Xuất</p>
+            </a>
+          </li>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Đổi mật khẩu</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Thông tin</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      @endif
+          <!-- =================================DanhMuc======================================== -->
+      @if(Auth::user()->role == 1 ||Auth::user()->role == 2 ||Auth::user()->role == 4) 
+          <li class="nav-item">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -330,9 +353,10 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+      @endif
         <!-- ============================================================ -->
-          <li class="nav-item">
+      @if(Auth::user()->role == 1 ||Auth::user()->role == 2 ) 
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -348,13 +372,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('xuatkho.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Xuất kho</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('chuyenkho.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Chuyển kho</p>
                 </a>
@@ -366,7 +390,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('baocao.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kho hàng</p>
                 </a>
@@ -379,6 +403,31 @@
               </li>
             </ul>
           </li>
+      @elseif (Auth::user()->role == 3 ||Auth::user()->role == 4)
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Chức năng
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Thẻ kho</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('baocao.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kho hàng</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+      @endif
           <!-- =============================================================== -->
           <li class="nav-item">
             <a href="#" class="nav-link active">
@@ -518,10 +567,10 @@
 
 <script src="{{ asset('lib/js/bootstrap/bootstrap-collapse.js')}}" type="text/javascript" ></script>
 
-<script src="{{ asset('lib/js/bootstrap/bootstrap-modal.js')}}" type="text/javascript" ></script>
+{{-- <script src="{{ asset('lib/js/bootstrap/bootstrap-modal.js')}}" type="text/javascript" ></script> --}}
 
 <script src="{{ asset('lib/js/bootstrap/bootstrap-transition.js')}}" type="text/javascript" ></script>
-<script src="{{ asset('lib/js/bootstrap/bootstrap-alert.js')}}" type="text/javascript" ></script>
+{{-- <script src="{{ asset('lib/js/bootstrap/bootstrap-alert.js')}}" type="text/javascript" ></script> --}}
 
 <script src="{{ asset('lib/js/bootstrap/bootstrap-dropdown.js')}}" type="text/javascript" ></script>
 <script src="{{ asset('lib/js/bootstrap/bootstrap-scrollspy.js')}}" type="text/javascript" ></script>
@@ -543,6 +592,8 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> --}}
 {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> --}}
+<script src="sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @yield('js-custom')
 
 </body>
